@@ -1,107 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { journeyItems, type JourneyItem } from "@/data/journeyData";
 
-interface JourneyItem {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  year?: string;
-  details: string;
-}
 
-const journeyItems: JourneyItem[] = [
-  {
-    id: "journey-001",
-    title: "Foundation & Formation",
-    description: "The Birth of IEEE SOU SB",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2017",
-    details:
-      "IEEE SOU Student Branch was founded in 2017 with 17 passionate members, establishing the foundation for a thriving community dedicated to technical excellence and professional development.",
-  },
-  {
-    id: "journey-002",
-    title: "Community Growth",
-    description: "Expanding Our Family",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2018",
-    details:
-      "The community grew rapidly as we organized our first technical workshops, connecting students with industry professionals and fostering a culture of learning and innovation.",
-  },
-  {
-    id: "journey-003",
-    title: "Technical Excellence",
-    description: "Innovation & Skills",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2019",
-    details:
-      "Despite the pandemic, we launched virtual workshops covering cutting-edge technologies including AI, Machine Learning, IoT, and Web Development, reaching hundreds of participants.",
-  },
-  {
-    id: "journey-004",
-    title: "Industry Partnerships",
-    description: "Collaborations & Networks",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2020",
-    details:
-      "Established strategic partnerships with leading tech companies, creating internship opportunities and mentorship programs that bridged the gap between academia and industry.",
-  },
-  {
-    id: "journey-005",
-    title: "Global Recognition",
-    description: "Awards & Achievements",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2021",
-    details:
-      "Received multiple accolades for our outstanding contributions to student development and technical innovation, gaining recognition at regional and national levels.",
-  },
-  {
-    id: "journey-006",
-    title: "Milestone: 200+ Members",
-    description: "Reaching New Heights",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2022",
-    details:
-      "Celebrated crossing the 200-member milestone with expanded offerings including leadership development programs, hackathons, and career guidance sessions.",
-  },
-  {
-    id: "journey-007",
-    title: "Research & Innovation",
-    description: "Driving Real-world Solutions",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2023",
-    details:
-      "Launched research initiatives encouraging members to work on projects addressing real-world challenges, fostering innovation and problem-solving skills.",
-  },
-  {
-    id: "journey-008",
-    title: "360° Development Motto",
-    description: "Inner & Outer Growth",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2024",
-    details:
-      "Introduced our signature motto '360° Development: 180° Inner, 180° Outer' emphasizing technical expertise alongside personal growth, leadership, and ethical values.",
-  },
-  {
-    id: "journey-009",
-    title: "Community Impact",
-    description: "Beyond SOU Campus",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-    year: "2025",
-    details:
-      "Extended our reach beyond campus through outreach programs, mentoring younger students, and contributing to the tech community through open-source initiatives.",
-  },
-];
 
 const PRO_GRADIENTS = [
   "linear-gradient(145deg, #0B192C 0%, #1A365D 50%, #0f2027 100%)",
@@ -294,7 +195,7 @@ export default function IEEESOUSSBJRNYLoop() {
           <div className={`absolute inset-0 rounded-xl opacity-0 ${role === 'active' ? 'group-hover:opacity-100' : ''} transition-opacity duration-300 pointer-events-none`} style={{ boxShadow: `inset 0 0 20px ${glowColor}` }}></div>
         </div>
         <div className={`mt-6 md:mt-8 text-center transition-all ${durationObj} ${contentDelay} ${contentOpacity} ${contentTransform}`}>
-          <a href="#" className={`inline-block px-5 py-2 rounded-full text-white text-xs font-semibold shadow hover:shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 ${buttonColor} ${role === 'next' || role === 'out' ? 'pointer-events-none' : ''}`}>Learn More</a>
+          <Link to={`/about/ieee-sou-sb-journey-loop/${item.id}`} className={`inline-block px-5 py-2 rounded-full text-white text-xs font-semibold shadow hover:shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 ${buttonColor} ${role === 'next' || role === 'out' ? 'pointer-events-none' : ''}`}>Learn More</Link>
         </div>
       </div>
     );
