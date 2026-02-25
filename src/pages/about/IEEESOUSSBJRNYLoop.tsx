@@ -1,4 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { journeyItems, type JourneyItem } from "@/data/journeyData";
+
+
 import { useNavigate } from "react-router-dom";
 
 interface JourneyItem {
@@ -294,6 +298,7 @@ export default function IEEESOUSSBJRNYLoop() {
           <div className={`absolute inset-0 rounded-xl opacity-0 ${role === 'active' ? 'group-hover:opacity-100' : ''} transition-opacity duration-300 pointer-events-none`} style={{ boxShadow: `inset 0 0 20px ${glowColor}` }}></div>
         </div>
         <div className={`mt-6 md:mt-8 text-center transition-all ${durationObj} ${contentDelay} ${contentOpacity} ${contentTransform}`}>
+          <Link to={`/about/ieee-sou-sb-journey-loop/${item.id}`} className={`inline-block px-5 py-2 rounded-full text-white text-xs font-semibold shadow hover:shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 ${buttonColor} ${role === 'next' || role === 'out' ? 'pointer-events-none' : ''}`}>Learn More</Link>
           <a href="#" className={`inline-block px-5 py-2 rounded-full text-white text-xs font-semibold shadow hover:shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 ${buttonColor} ${role === 'next' || role === 'out' ? 'pointer-events-none' : ''}`}>Learn More</a>
         </div>
       </div>
