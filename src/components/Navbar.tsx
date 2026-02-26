@@ -13,11 +13,11 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { useTheme } from "@/lib/theme-provider";
+
+/* ---------------- NAV STRUCTURE ---------------- */
+
 const NAV_ITEMS: NavItem[] = [
-  {
-    title: "Home",
-    href: "/",
-  },
+  { title: "Home", href: "/" },
   {
     title: "About",
     children: [
@@ -42,7 +42,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     title: "Events",
     children: [
-      { title: "2024", href: "https://ieee.socet.edu.in/?author=0" },
+      { title: "2024", href: "/events?year=2024" },
       { title: "2025", href: "/events?year=2025" },
       { title: "2026", href: "/events?year=2026" },
     ],
@@ -57,40 +57,37 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    title: "Achievements",
+    title: "Achievement",
     children: [
-      { title: "Branch Awards", href: "/awards/branch" },
-      { title: "Student Achievements", href: "/awards/student" },
-      { title: "Newsletter", href: "/newsletter" },
+      { title: "Branch Awards", href: "/achievement/branch-awards" },
+      { title: "Newsletter", href: "/achievement/newsletter" },
+      { title: "Student Achievement", href: "/achievement/student" },
     ],
   },
-  {
-    title: "Bylaws",
-    href: "/bylaws",
-  },
-  {
-    title: "Contact Us",
-    href: "/contact",
-  }
+  { title: "Bylaws", href: "/bylaws" },
+  { title: "Contact Us", href: "/contact" },
 ];
+
+/* ---------------- COMPONENT ---------------- */
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { theme, setTheme } = useTheme();
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+
   const handleMobileDropdownToggle = (title: string) => {
     setOpenDropdown((prev) => (prev === title ? null : title));
   };
+
   return (
     <header
       className={cn(
@@ -103,7 +100,6 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          {/* the below div has been changed to decrease size of dark mode (last change) */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
               <img
@@ -115,22 +111,25 @@ export default function Navbar() {
                 }
                 alt="IEEE SOU SB Logo"
                 className={cn(
-                  "w-auto object-contain", // width is auto for both modes
-                  theme === "dark" ? "h-12 md:h-20" : "h-12 md:h-20", // conditional height for dark mode
-                  theme === "dark" ? "max-w-[300px]" : "max-w-[350px]" // conditional max-width for dark mode
+                  "w-auto object-contain",
+                  theme === "dark" ? "h-12 md:h-20 max-w-[300px]" : "h-12 md:h-20 max-w-[350px]"
                 )}
               />
             </Link>
           </div>
+
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center md:space-x-1">
+          <nav className="hidden md:flex md:flex-1 md:items-center md:justify-center md:space-x-0.5">
             {NAV_ITEMS.map((item) => (
               <React.Fragment key={item.title}>
                 {item.children ? (
                   <NavigationMenu>
                     <NavigationMenuList>
                       <NavigationMenuItem>
-                        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                        <NavigationMenuTrigger>
+                          {item.title}
+                        </NavigationMenuTrigger>
+
                         <NavigationMenuContent>
                           <div className="w-60 p-2">
                             {item.children.map((child) => (
@@ -181,7 +180,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     to={item.href || "#"}
-                    className="block px-3 py-2 rounded-md text-sm font-medium hover:text-primary transition-colors"
+                    className="px-2 py-2 text-sm font-medium hover:text-primary whitespace-nowrap transition-colors"
                   >
                     {item.title}
                   </Link>
@@ -189,6 +188,7 @@ export default function Navbar() {
               </React.Fragment>
             ))}
 
+            {/* Action Buttons — right */}
             <div className="flex items-center gap-2 ml-2">
               <Button
                 variant="outline"
@@ -208,6 +208,7 @@ export default function Navbar() {
               </Button>
             </div>
           </nav>
+
           {/* Mobile Menu Button */}
           <div className="flex md:hidden">
             <Button
@@ -222,6 +223,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
       {/* Mobile Dropdown */}
       <div
         className={cn(

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import React, { useState, useRef } from "react";
+=======
 import { useState, useEffect } from "react";
+>>>>>>> upstream/master
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +16,60 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+<<<<<<< HEAD
+import { sendEmail } from "@/lib/sendEmail";
+
+export default function Join() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [department, setDepartment] = useState("");
+  const [semester, setSemester] = useState("");
+  const [academicYear, setAcademicYear] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = formRef.current;
+    if (!form) return;
+
+    const name = (form.querySelector("#name") as HTMLInputElement)?.value.trim();
+    const email = (form.querySelector("#email") as HTMLInputElement)?.value.trim();
+    const phone = (form.querySelector("#phone") as HTMLInputElement)?.value.trim();
+    const enrollment = (form.querySelector("#enrollment") as HTMLInputElement)?.value.trim();
+    const college = (form.querySelector("#college") as HTMLInputElement)?.value.trim();
+    const reason = (form.querySelector("#reason") as HTMLTextAreaElement)?.value.trim();
+
+    if (!name || !email) {
+      toast.error("Please fill in your name and email.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await sendEmail({
+        name,
+        email,
+        phone,
+        page: "Join",
+        fields: {
+          "Enrollment Number": enrollment,
+          College: college,
+          Department: department,
+          Semester: semester,
+          "Academic Year": academicYear,
+          "Reason to Join": reason,
+        },
+      });
+      toast.success("Application submitted! We'll contact you soon.");
+      form.reset();
+      setDepartment("");
+      setSemester("");
+      setAcademicYear("");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to submit application.");
+    } finally {
+      setIsLoading(false);
+    }
+=======
 import { X } from "lucide-react";
 
 export default function Join() {
@@ -81,6 +139,7 @@ export default function Join() {
         },
       }
     );
+>>>>>>> upstream/master
   };
 
   return (
@@ -97,7 +156,11 @@ export default function Join() {
           </div>
 
           <div className="rounded-lg p-8 border border-gray-200 dark:border-gray-700 shadow-lg bg-white dark:bg-gray-900 transition-colors">
+<<<<<<< HEAD
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+=======
             <form onSubmit={handleSubmit} className="space-y-6">
+>>>>>>> upstream/master
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
@@ -121,11 +184,24 @@ export default function Join() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="department">Department</Label>
+<<<<<<< HEAD
+                  <Select value={department} onValueChange={setDepartment}>
+=======
                   <Select>
+>>>>>>> upstream/master
                     <SelectTrigger>
                       <SelectValue placeholder="Select department" />
                     </SelectTrigger>
                     <SelectContent>
+<<<<<<< HEAD
+                      <SelectItem value="Computer Engineering">Computer Engineering</SelectItem>
+                      <SelectItem value="Information Technology">Information Technology</SelectItem>
+                      <SelectItem value="Electronics & Communication">Electronics &amp; Communication</SelectItem>
+                      <SelectItem value="Electrical Engineering">Electrical Engineering</SelectItem>
+                      <SelectItem value="Mechanical Engineering">Mechanical Engineering</SelectItem>
+                      <SelectItem value="Civil Engineering">Civil Engineering</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+=======
                       <SelectItem value="ce">Computer Engineering</SelectItem>
                       <SelectItem value="it">Information Technology</SelectItem>
                       <SelectItem value="ec">Electronics & Communication</SelectItem>
@@ -133,18 +209,27 @@ export default function Join() {
                       <SelectItem value="me">Mechanical Engineering</SelectItem>
                       <SelectItem value="civil">Civil Engineering</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
+>>>>>>> upstream/master
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="semester">Semester</Label>
+<<<<<<< HEAD
+                  <Select value={semester} onValueChange={setSemester}>
+=======
                   <Select>
+>>>>>>> upstream/master
                     <SelectTrigger>
                       <SelectValue placeholder="Select semester" />
                     </SelectTrigger>
                     <SelectContent>
                       {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
+<<<<<<< HEAD
+                        <SelectItem key={sem} value={`Semester ${sem}`}>
+=======
                         <SelectItem key={sem} value={sem.toString()}>
+>>>>>>> upstream/master
                           Semester {sem}
                         </SelectItem>
                       ))}
@@ -153,15 +238,26 @@ export default function Join() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="year">Academic Year</Label>
+<<<<<<< HEAD
+                  <Select value={academicYear} onValueChange={setAcademicYear}>
+=======
                   <Select>
+>>>>>>> upstream/master
                     <SelectTrigger>
                       <SelectValue placeholder="Select year" />
                     </SelectTrigger>
                     <SelectContent>
+<<<<<<< HEAD
+                      <SelectItem value="First Year">First Year</SelectItem>
+                      <SelectItem value="Second Year">Second Year</SelectItem>
+                      <SelectItem value="Third Year">Third Year</SelectItem>
+                      <SelectItem value="Fourth Year">Fourth Year</SelectItem>
+=======
                       <SelectItem value="1">First Year</SelectItem>
                       <SelectItem value="2">Second Year</SelectItem>
                       <SelectItem value="3">Third Year</SelectItem>
                       <SelectItem value="4">Fourth Year</SelectItem>
+>>>>>>> upstream/master
                     </SelectContent>
                   </Select>
                 </div>
@@ -176,8 +272,13 @@ export default function Join() {
                 />
               </div>
 
+<<<<<<< HEAD
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Submitting…" : "Submit Application"}
+=======
               <Button type="submit" className="w-full">
                 Submit Application
+>>>>>>> upstream/master
               </Button>
             </form>
           </div>

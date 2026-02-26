@@ -9,6 +9,9 @@ export type NavItem = {
   title: string;
   href?: string;
   description?: string;
+<<<<<<< HEAD
+  children?: NavItem[];
+=======
   children?: {
     title: string;
     href?: string;
@@ -19,6 +22,7 @@ export type NavItem = {
       description?: string;
     }[];
   }[];
+>>>>>>> upstream/master
 };
 
 export type Event = {
